@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "cicd-template"
+version = "0.1.0"
+description = "A template for CI/CD development tools."
+authors = ["nicklamiller <nicklamiller@gmail.com>"]
+readme = "README.md"
+packages = [{include = "cicd_template"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pygame = "^2.1.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.0"
+autopep8 = "1.6.0"
+wemake-python-styleguide = "0.16.1"
+unify = "^0.5"
+isort = "^5.10.1"
+flake8 = "4.0.1"
+pre-commit = "^2.20.0"
+coverage = "^6.5.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
