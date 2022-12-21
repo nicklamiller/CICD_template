@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "A template for CI/CD development tools."
 authors = ["nicklamiller <nicklamiller@gmail.com>"]
 readme = "README.md"
-packages = [{include = "cicd_template"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
