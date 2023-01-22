@@ -22,3 +22,8 @@ lint-flake8:
 
 shell:
 		poetry shell
+
+precommit: poetry-precommit lint
+
+poetry-precommit:
+		poetry run pre-commit run --all-files
