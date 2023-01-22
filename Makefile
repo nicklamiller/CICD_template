@@ -2,14 +2,19 @@ POETRY_RUN := poetry run
 FOLDERS= src
 NC=\033[0m # No Color
 
-.PHONY: install autolint lint lint-flake8 shell
+.PHONY: install autolint lint lint-flake8 shell precommit poetry-precommit \
+		install-dev
 
-install:
+install: install-dev
 		poetry install
 
 lint:
 		make autolint
 		make lint-flake8
+
+install-dev:
+		cp tools/pre-commit .git/hooks
+		chmod +x .git/hooks/pre-commit
 
 autolint:
 		@${POETRY_RUN} autopep8 -r -i ${FOLDERS}
