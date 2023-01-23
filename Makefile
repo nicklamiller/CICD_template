@@ -5,6 +5,11 @@ NC=\033[0m # No Color
 .PHONY: install autolint lint lint-flake8 shell precommit poetry-precommit \
 		install-dev
 
+test:
+		${POETRY_RUN} coverage erase
+		${POETRY_RUN} coverage run --branch -m pytest tests ${PROJ} \
+				--junitxml=junit/test-results.xml -v
+
 install: install-dev
 		poetry install
 
