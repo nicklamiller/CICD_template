@@ -10,6 +10,10 @@ concurrency:
 
 jobs:
 
+  unit-tests:
+    name: Unit tests
+    uses: ./.github/workflows/unit-tests.yml
+
   lint:
     name: Lint
     uses: ./.github/workflows/lint.yml
