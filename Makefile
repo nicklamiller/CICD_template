@@ -3,7 +3,7 @@ FOLDERS= src
 NC=\033[0m # No Color
 
 .PHONY: install autolint lint lint-flake8 shell precommit poetry-precommit \
-		install-dev test
+		install-dev test report-coverage
 
 test:
 		${POETRY_RUN} coverage erase
@@ -37,3 +37,8 @@ precommit: poetry-precommit lint
 
 poetry-precommit:
 		poetry run pre-commit run --all-files
+
+report-coverage:
+		${POETRY_RUN} coverage report
+		${POETRY_RUN} coverage html
+		${POETRY_RUN} coverage xml
