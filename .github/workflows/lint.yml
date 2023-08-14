@@ -34,7 +34,7 @@ jobs:
           key: venv-${{ env.PYTHON_VERSION }}-${{ runner.os }}-${{ hashFiles('**/pyproject.toml', '**/poetry.lock') }}
 
       - name: Install dependencies and project in dev mode
-        if: steps.cache.outputs.cache-hit != true
+        if: steps.cache.outputs.cache-hit != 'true'
         run: make install
 
       - name:
