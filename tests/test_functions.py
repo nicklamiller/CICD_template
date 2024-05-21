@@ -1,5 +1,5 @@
 """This module is for testing functions in my_module."""
-from src import my_module
+from cicd_template import my_module
 
 
 def test_function1():
