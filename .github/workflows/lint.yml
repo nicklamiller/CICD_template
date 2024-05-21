@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 env:
-  PYTHON_VERSION: 3.10.8
+  PYTHON_VERSION: 3.12
 
 jobs:
   flake8:
