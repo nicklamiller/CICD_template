@@ -6,24 +6,22 @@ authors = ["nicklamiller <nicklamiller@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
-pandas = "^2.2.2"
 numpy = "^1.26.4"
+pandas = "^2.2.2"
 pydantic = "^2.7.1"
+python = "^3.12"
 scikit-learn = "^1.4.2"
 statsmodels = "^0.14.2"
 
 [tool.poetry.group.dev.dependencies]
-pandas-stubs = "^2.2.2"
-pytest = "^8.2.1"
-autopep8 = "2.1.0"
-wemake-python-styleguide = "0.19.2"
-unify = "^0.5"
-isort = "^5.13.2"
-flake8 = "7.0.0"
-mypy = "^1.10.0"
-pre-commit = "^3.7.1"
 coverage = "^7.5.1"
+isort = "^5.13.2"
+mypy = "^1.10.0"
+pandas-stubs = "^2.2.2"
+pre-commit = "^3.7.1"
+pytest = "^8.2.1"
+ruff = "^0.4.7"
+unify = "^0.5"
 
 [build-system]
 requires = ["poetry-core"]

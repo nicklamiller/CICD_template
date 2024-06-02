@@ -3,7 +3,7 @@ FOLDERS= cicd_template
 PROJ= cicd_template
 NC=\033[0m # No Color
 
-.PHONY: install autolint lint lint-flake8 shell precommit poetry-precommit \
+.PHONY: install autolint lint lint-ruff shell precommit poetry-precommit \
 		install-dev test report-coverage
 
 test:
@@ -16,7 +16,7 @@ install: install-dev
 
 lint:
 		make autolint
-		make lint-flake8
+		make lint-ruff
 		make lint-mypy
 
 install-dev:
@@ -24,13 +24,13 @@ install-dev:
 		chmod +x .git/hooks/pre-commit
 
 autolint:
-		@${POETRY_RUN} autopep8 -r -i ${FOLDERS}
+		@${POETRY_RUN} ruff format ${FOLDERS}
 		@${POETRY_RUN} unify -r -i ${FOLDERS}
 		@${POETRY_RUN} isort ${FOLDERS}
 
-lint-flake8:
-		@echo "\n${BLUE}Running flake8...${NC}\n"
-		@${POETRY_RUN} flake8 .
+lint-ruff:
+		@echo "\n${BLUE}Running ruff...${NC}\n"
+		@${POETRY_RUN} ruff check .
 
 lint-mypy:
 		@echo "\n${BLUE}Running mypy...${NC}\n"
