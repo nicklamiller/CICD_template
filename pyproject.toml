@@ -15,13 +15,25 @@ statsmodels = "^0.14.2"
 
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.5.1"
-isort = "^5.13.2"
 mypy = "^1.10.0"
 pandas-stubs = "^2.2.2"
 pre-commit = "^3.7.1"
 pytest = "^8.2.1"
 ruff = "^0.4.7"
-unify = "^0.5"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = [
+    "E", # pycodestyle - Error
+    "I", # isort
+    "F", # Pyflakes
+    "PT", # flake8-pytest-style
+]
 
 [build-system]
 requires = ["poetry-core"]

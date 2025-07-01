@@ -12,7 +12,7 @@ test:
 				--junitxml=junit/test-results.xml -v
 
 install: install-dev
-		poetry install
+		poetry install --with dev
 
 lint:
 		make autolint
@@ -25,12 +25,10 @@ install-dev:
 
 autolint:
 		@${POETRY_RUN} ruff format ${FOLDERS}
-		@${POETRY_RUN} unify -r -i ${FOLDERS}
-		@${POETRY_RUN} isort ${FOLDERS}
 
 lint-ruff:
 		@echo "\n${BLUE}Running ruff...${NC}\n"
-		@${POETRY_RUN} ruff check .
+		@${POETRY_RUN} ruff check . --fix
 
 lint-mypy:
 		@echo "\n${BLUE}Running mypy...${NC}\n"
