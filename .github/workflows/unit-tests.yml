@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 env:
-  PYTHON_VERSION: 3.12
+  PYTHON_VERSION: 3.13
 
 jobs:
 
@@ -22,10 +22,11 @@ jobs:
         with:
           python-version: ${{env.PYTHON_VERSION}}
 
-      - name: Install poetry
-        run: |
-          pip3 install --upgrade poetry
-          poetry config virtualenvs.in-project true
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: "latest"
+          enable-cache: true
 
       - name: Load Cached Virtualenv
         id: cache

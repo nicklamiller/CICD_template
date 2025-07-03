@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 env:
-  PYTHON_VERSION: 3.12
+  PYTHON_VERSION: 3.13
 
 jobs:
   flake8:
@@ -21,17 +21,22 @@ jobs:
         with:
           python-version: ${{env.PYTHON_VERSION}}
 
-      - name: Install poetry
-        run: |
-          pip3 install --upgrade poetry
-          poetry config virtualenvs.in-project true
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: "latest"
+          enable-cache: true
 
       - name: Load Cached Virtualenv
         id: cache
         uses: actions/cache@v4.2.3
         with:
-          path: .venv
-          key: venv-${{ env.PYTHON_VERSION }}-${{ runner.os }}-${{ hashFiles('**/pyproject.toml', '**/poetry.lock') }}
+          path: |
+            ~/.cache/uv
+            .venv
+          key: uv-${{ env.PYTHON_VERSION }}-${{ runner.os }}-${{ hashFiles('**/pyproject.toml', '**/uv.lock') }}
+          restore-keys: |
+            uv-${{ env.PYTHON_VERSION }}-${{ runner.os }}-
 
       - name: Install dependencies and project in dev mode
         if: steps.cache.outputs.cache-hit != 'true'
