@@ -1,18 +1,18 @@
-POETRY_RUN := poetry run
+UV_RUN := uv run
 FOLDERS= cicd_template
 PROJ= cicd_template
 NC=\033[0m # No Color
 
-.PHONY: install autolint lint lint-ruff shell precommit poetry-precommit \
+.PHONY: install autolint lint lint-ruff shell precommit uv-precommit \
 		install-dev test report-coverage
 
 test:
-		${POETRY_RUN} coverage erase
-		${POETRY_RUN} coverage run --branch -m pytest tests ${PROJ} \
+		${UV_RUN} coverage erase
+		${UV_RUN} coverage run --branch -m pytest tests ${PROJ} \
 				--junitxml=junit/test-results.xml -v
 
 install: install-dev
-		poetry install --with dev
+		uv sync
 
 lint:
 		make autolint
@@ -24,25 +24,22 @@ install-dev:
 		chmod +x .git/hooks/pre-commit
 
 autolint:
-		@${POETRY_RUN} ruff format ${FOLDERS}
+		@${UV_RUN} ruff format ${FOLDERS}
 
 lint-ruff:
 		@echo "\n${BLUE}Running ruff...${NC}\n"
-		@${POETRY_RUN} ruff check . --fix
+		@${UV_RUN} ruff check . --fix
 
 lint-mypy:
 		@echo "\n${BLUE}Running mypy...${NC}\n"
-		${POETRY_RUN} mypy --show-error-codes ${PROJ}
+		${UV_RUN} mypy --show-error-codes ${PROJ}
 
-shell:
-		poetry shell
+precommit: uv-precommit lint
 
-precommit: poetry-precommit lint
-
-poetry-precommit:
-		poetry run pre-commit run --all-files
+uv-precommit:
+		${UV_RUN} pre-commit run --all-files
 
 report-coverage:
-		${POETRY_RUN} coverage report
-		${POETRY_RUN} coverage html
-		${POETRY_RUN} coverage xml
+		${UV_RUN} coverage report
+		${UV_RUN} coverage html
+		${UV_RUN} coverage xml
