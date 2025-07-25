@@ -28,6 +28,7 @@ jobs:
         run: echo "path=$(uv cache dir)" >> $GITHUB_OUTPUT
 
       - name: Cache dependencies
+        id: cache
         uses: actions/cache@v4
         with:
           path: ${{ steps.uv-cache-dir.outputs.path }}
