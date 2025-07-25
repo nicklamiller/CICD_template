@@ -17,23 +17,23 @@ jobs:
         with:
           ref: ${{ inputs.git_ref }}
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{env.PYTHON_VERSION}}
-
       - name: Install uv
         uses: astral-sh/setup-uv@v6
         with:
           version: "latest"
-          enable-cache: true
+          enable-cache: false # Issue with UV's cache file and where GHA saves cache, hence manually caching
 
-      - name: Load Cached Virtualenv
-        id: cache
-        uses: actions/cache@v4.2.3
+      - name: Get uv cache directory
+        id: uv-cache-dir
+        run: echo "path=$(uv cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
         with:
-          path: .venv
-          key: venv-${{ env.PYTHON_VERSION }}-${{ runner.os }}-${{ hashFiles('**/pyproject.toml', '**/poetry.lock') }}
+          path: ${{ steps.uv-cache-dir.outputs.path }}
+          key: ${{ runner.os }}-uv-${{ hashFiles('**/uv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-uv-
 
       - name: Install dependencies and project in dev mode
         if: steps.cache.outputs.cache-hit != 'true'

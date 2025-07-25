@@ -35,6 +35,7 @@ jobs:
             ${{ runner.os }}-uv-
 
       - name: Install dependencies and project in dev mode
+        if: steps.cache.outputs.cache-hit != 'true'
         run: make install
 
       - name: Lint
