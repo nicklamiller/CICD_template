@@ -3,9 +3,6 @@ name: Unit Tests
 on:
   workflow_call:
 
-env:
-  PYTHON_VERSION: 3.13
-
 jobs:
 
   test-pipeline:

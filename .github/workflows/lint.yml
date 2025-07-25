@@ -3,9 +3,6 @@ name: Lint
 on:
   workflow_call:
 
-env:
-  PYTHON_VERSION: 3.13
-
 jobs:
   flake8:
     name: Python - Flake8
