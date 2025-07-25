@@ -1,25 +1,31 @@
-[tool.poetry]
+[project]
 name = "cicd-template"
 version = "0.1.0"
 description = "A template for CI/CD development tools."
-authors = ["nicklamiller <nicklamiller@gmail.com>"]
+authors = [{ name = "nicklamiller", email = "nicklamiller@gmail.com" }]
+requires-python = "==3.13.*"
 readme = "README.md"
+dependencies = [
+    "numpy==2.3.1",
+    "pandas==2.3.1",
+    "pydantic==2.11.7",
+    "scikit-learn==1.7.0",
+    "statsmodels==0.14.5",
+]
 
-[tool.poetry.dependencies]
-numpy = "^1.26.4"
-pandas = "^2.2.2"
-pydantic = "^2.7.1"
-python = "^3.12"
-scikit-learn = "^1.4.2"
-statsmodels = "^0.14.2"
+[dependency-groups]
+dev = [
+    "coverage==7.9.2",
+    "mypy==1.16.1",
+    "pandas-stubs>=2.3.0",
+    "pre-commit==4.2.0",
+    "pytest==8.4.1",
+    "ruff==0.12.2",
+]
 
-[tool.poetry.group.dev.dependencies]
-coverage = "^7.5.1"
-mypy = "^1.10.0"
-pandas-stubs = "^2.2.2"
-pre-commit = "^3.7.1"
-pytest = "^8.2.1"
-ruff = "^0.4.7"
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.ruff.format]
 quote-style = "double"
@@ -34,7 +40,3 @@ select = [
     "F", # Pyflakes
     "PT", # flake8-pytest-style
 ]
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
