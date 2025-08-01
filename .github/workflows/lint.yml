@@ -4,8 +4,8 @@ on:
   workflow_call:
 
 jobs:
-  flake8:
-    name: Python - Flake8
+  ruff:
+    name: Python - ruff
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
