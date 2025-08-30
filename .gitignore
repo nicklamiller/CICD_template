@@ -164,3 +164,6 @@ junit/
 
 # macOS
 .DS_Store
+
+# Ignore local folder for easier experimentation
+local/
