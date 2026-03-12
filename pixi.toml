@@ -1,0 +1,30 @@
+[workspace]
+authors = ["Nick Miller <nicklamiller@gmail.com>"]
+channels = ["conda-forge"]
+name = "CICD_template"
+platforms = ["osx-arm64", "linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+numpy = "2.3.1.*"
+pandas = "2.3.1.*"
+pydantic = "2.11.7.*"
+scikit-learn = "1.7.0.*"
+statsmodels = "0.14.5.*"
+
+[pypi-dependencies]
+cicd_template = { path = ".", editable = true }
+
+[feature.dev.dependencies]
+ipykernel = "6.29.5.*"
+
+[feature.test.dependencies]
+pre-commit = "4.2.0.*"
+pytest = "8.4.1.*"
+
+[environments]
+production = { solve-group = "prod" }
+test = { features = ["test"], solve-group = "prod" }
+default = { features = ["dev", "test"], solve-group = "prod" }

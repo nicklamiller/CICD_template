@@ -167,3 +167,6 @@ junit/
 
 # Ignore local folder for easier experimentation
 local/
+# pixi environments
+.pixi/*
+!.pixi/config.toml
