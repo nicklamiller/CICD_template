@@ -5,27 +5,13 @@ description = "A template for CI/CD development tools."
 authors = [{ name = "nicklamiller", email = "nicklamiller@gmail.com" }]
 requires-python = "==3.13.*"
 readme = "README.md"
-dependencies = [
-    "numpy==2.3.1",
-    "pandas==2.3.1",
-    "pydantic==2.11.7",
-    "scikit-learn==1.7.0",
-    "statsmodels==0.14.5",
-]
-
-[dependency-groups]
-dev = [
-    "coverage==7.9.2",
-    "mypy==1.16.1",
-    "pandas-stubs>=2.3.0",
-    "pre-commit==4.2.0",
-    "pytest==8.4.1",
-    "ruff==0.12.2",
-]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.setuptools.packages.find]
+include = ["cicd_template"]
 
 [tool.ruff.format]
 quote-style = "double"

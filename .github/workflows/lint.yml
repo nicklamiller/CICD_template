@@ -4,37 +4,28 @@ on:
   workflow_call:
 
 jobs:
-  ruff:
-    name: Python - ruff
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.git_ref }}
+          ref: ${{ inputs.sha }}
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
+      - name: Set up pixi
+        uses: prefix-dev/setup-pixi@v0.9.4
         with:
-          version: "latest"
-          enable-cache: false # Issue with UV's cache file and where GHA saves cache, hence manually caching
+          cache: true
+          environments: test
+          locked: true
+          pixi-version: v0.62.2
 
-      - name: Get uv cache directory
-        id: uv-cache-dir
-        run: echo "path=$(uv cache dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache dependencies
-        id: cache
+      - name: Cache pre-commit hooks
         uses: actions/cache@v5
         with:
-          path: ${{ steps.uv-cache-dir.outputs.path }}
-          key: ${{ runner.os }}-uv-${{ hashFiles('**/uv.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-uv-
+          path: .pre-commit-cache
+          key: ${{ runner.os }}-pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
 
-      - name: Install dependencies and project in dev mode
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: make install
 
-      - name: Lint
-        run: make lint
+      - name: Run pre-commit checks
+        run: pixi run pre-commit run --all-files
