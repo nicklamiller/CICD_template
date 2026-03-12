@@ -25,9 +25,3 @@ jobs:
             --color=yes \
             --durations=0 \
             --durations-min=1
-
-      - name: Report
-        run: |
-          pixi run coverage report
-          pixi run coverage html
-          pixi run coverage xml
